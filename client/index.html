@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test graphQl in front-end</title>
+</head>
+<body>
+    <script>
+
+        const mutationUpdateTodo={
+                query:`mutation($updateTodoId: Int!, $todo: TodoInput!){
+                    updateTodo(id: $updateTodoId, todo: $todo) {
+                        id
+                        title
+                    }                        
+                }
+                `,
+                variables:{
+                    updateTodoId:2,
+                    todo:{
+                        title:"xxxx"
+                    }
+                }}
+        const queryAllUsers={
+                query:`
+                    {
+                        users{
+                            id
+                            name
+                            email
+                        }
+                    }
+                    `
+            }
+       async function getAllUser(){
+        let res=await fetch("http://localhost:3100/qraphql",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify (queryAllUsers)
+            
+        })
+        let users= await res.json()
+        console.log('users: ', users);
+
+        }
+        getAllUser()
+    </script>
+</body>
+</html>
