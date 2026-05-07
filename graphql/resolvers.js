@@ -1,4 +1,4 @@
-import { TODOS, USERS } from "./_db.js";
+import { TODOS, USERS } from "../data/_db.js";
 
 const resolvers = {
     Query: {

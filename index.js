@@ -1,7 +1,7 @@
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { ApolloServer } from "@apollo/server";
-import typeDefs from "./typeDefs.js";
-import resolvers from "./resolvers.js";
+import typeDefs from "./graphql/typeDefs.js";
+import resolvers from "./graphql/resolvers.js";
 
 const server= new ApolloServer({
     typeDefs,
