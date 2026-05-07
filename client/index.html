@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test graphQl in client</title>
+  </head>
+  <body>
+      <script>
+        //----------------------------------query--------------------------------------//
+      async function getAllUsers() {
+        let res = await fetch("http://localhost:3200/graphql", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify({
+            query: `{
+                        users {
+                            name
+                            todos {
+                            title
+                            completed
+                            }
+                        }
+                    }`,
+          }),
+        });
+        let users = await res.json();
+        console.log("users: ", users);
+      }
+      // getAllUsers()
+
+      //----------------------------------mutation--------------------------------------//
+      async function editTodo() {
+        let res = await fetch("http://localhost:3200/graphql", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify({
+            query: `mutation{
+                            updateTodo(id:2,todo: {
+                                title:"solve assignments",
+                                completed:false
+                            }, userId:2) {
+                                id
+                                title
+                                completed
+                            }
+                        }
+                    `
+          }),
+        });
+        let todoAfterEdit = await res.json();
+        console.log("todoAfterEdit: ", todoAfterEdit);
+      }
+    //   editTodo();
+    </script>
+  </body>
+</html>
